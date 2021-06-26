@@ -1,0 +1,145 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{ctex}
+\usepackage{amsmath,amscd,amsbsy,amssymb,latexsym,url,bm,amsthm}
+\usepackage{epsfig,graphicx,subfigure}
+\usepackage{enumitem,balance}
+\usepackage{wrapfig}
+\usepackage{mathrsfs,euscript}
+\usepackage[usenames]{xcolor}
+\usepackage{hyperref}
+\usepackage[vlined,ruled,linesnumbered]{algorithm2e}
+\hypersetup{colorlinks=true,linkcolor=black}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{exercise}{Exercise}
+\newtheorem*{solution}{Solution}
+\newtheorem{definition}{Definition}
+\theoremstyle{definition}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\newcommand{\postscript}[2]
+ {\setlength{\epsfxsize}{#2\hsize}
+  \centerline{\epsfbox{#1}}}
+
+\renewcommand{\baselinestretch}{1.0}
+
+\setlength{\oddsidemargin}{-0.365in}
+\setlength{\evensidemargin}{-0.365in}
+\setlength{\topmargin}{-0.3in}
+\setlength{\headheight}{0in}
+\setlength{\headsep}{0in}
+\setlength{\textheight}{10.1in}
+\setlength{\textwidth}{7in}
+\makeatletter \renewenvironment{proof}[1][Proof] {\par\pushQED{\qed}\normalfont\topsep6\p@\@plus6\p@\relax\trivlist\item[\hskip\labelsep\bfseries#1\@addpunct{.}]\ignorespaces}{\popQED\endtrivlist\@endpefalse} \makeatother
+\makeatletter
+\renewenvironment{solution}[1][Solution] {\par\pushQED{\qed}\normalfont\topsep6\p@\@plus6\p@\relax\trivlist\item[\hskip\labelsep\bfseries#1\@addpunct{.}]\ignorespaces}{\popQED\endtrivlist\@endpefalse} \makeatother
+
+\begin{document}
+\noindent
+
+%========================================================================
+\noindent\framebox[\linewidth]{\shortstack[c]{
+\Large{\textbf{Lab00-Proof}}\vspace{1mm}\\
+CS214-Algorithm and Complexity, Xiaofeng Gao, Spring 2021.}}
+\begin{center}
+\footnotesize{\color{red}$*$ If there is any problem, please contact TA Haolin Zhou.}
+
+% Please write down your name, student id and email.
+\footnotesize{\color{blue}$*$ Name:Renyang Guan  \quad Student ID:519021911058 \quad Email: guanrenyang@sjtu.edu.cn}
+\end{center}
+
+\begin{enumerate}
+    \item
+    Prove that for any integer $n>2$, there is a prime $p$ satisfying $n<p<n!$. {\color{blue}(Hint: consider a prime factor $p$ of $n!-1$ and prove by contradiction)}
+    \begin{proof}
+    ~\\
+    \textit{Case 1:} $p$ is a prime factor of $n!-1$, then $p$ is a prime factor of $n!$. The statement is obviously true.  
+    
+	\textit{Case 2:} $n!-1$ has no prime factor, then $n!-1$ is a prime number and $n-1 \geq 1$, such that $p=n!-1$ is a prime factor of $n!$.
+    \end{proof}
+
+    \item
+    Use the minimal counterexample principle to prove that for any integer $n\ge 7$, there exists integers $i_n\ge 0$ and $j_n\ge 0$, such that $n = i_n \times 2 + j_n \times 3$.
+    \begin{proof}We proof the statement is true for $n\geq7$ by induction.  
+    
+    \textbf{Basis step:} 
+     ~\\
+    $n=7$: $\exists  i_n=2,j_n=1,\quad st. n=i_n\times2 + j_n 	\times 3$ \\
+    $n=8$: $\exists  i_n=1,j_n=2,\quad st. n=i_n\times2 + j_n 	\times 3$ \\
+    $n=9$: $\exists  i_n=0,j_n=3,\quad st. n=i_n\times2 + j_n 	\times 3$ \\
+    $n=10$: $\exists  i_n=2,j_n=2,\quad st. n=i_n\times2 + j_n 	\times 3$ \\
+    \textbf{Induction Hypothesis:} Assume that exists $n>10$, there any intergers $i_n\geq 0$ and $j_n\geq 0$, such that $n \neq i_n \times 2+j_n \times 3$  
+    
+    \textbf{Proof of Induction Step:} Define a new variable $m$,
+   	\begin{equation}
+	m=\left\{
+	\begin{aligned}
+	n-2 && i_n\neq 0  \\
+	n-3 && i_n = 0 \\
+	\end{aligned}
+	\right.
+	\end{equation}  
+	Because $n\geq 10$, therefore $m\geq 7$ and $m<n$ and 
+	\begin{equation}
+	m\neq \left\{
+	\begin{aligned}
+	(i_n-1)\times 2+j_n\times 3 && i_n\neq 0 \\
+	i_n\times 2+(j_n-1)\times 3 && i_n = 0 \\
+	\end{aligned}
+	\right.
+	\end{equation}	 
+	$i_n-1$ and $j_n-1$ can take arbitrary values in $\mathbb{N}$.
+    \end{proof}
+
+    \item
+    Suppose the function $f$ be defined on the natural numbers recursively as follows: $f(0)=0$, $f(1)=1$, and $f(n)=5f(n-1)-6f(n-2)$, for $n\geq 2$. Use the strong principle of mathematical induction to prove that for all $n\in N$, $f(n)=3^n-2^n$. 
+    \begin{proof}We proof $f(n)=3^n-2^n$ is true for $n\geq2$ by induction.  
+    
+        \textbf{Basis step:} For $n=0,\quad f(n)=3^0-2^0=0$.  
+        
+        \textbf{Induction Hypothesis:} Let $n>0$. Assume that for any integer $k \in [0,n]$ and $k>0$, such that $f(k)=3^k-2^k$.  
+        
+        \textbf{Proof of Induction Step:} Now let us prove that $f(n+1)=3^{n+1}-2^{n+1}$ is true.
+        \begin{align}
+       f(n+1) &=5f(n)-6f(n-1)\\
+        & =5(3^{n}-2^{n})-6(3^{n-1}-2^{n-1})\\
+        & =9\times 3^{n-1}-4\times 2^{n-1}\\
+        & =3^{n+1}-2^{n+1}
+        \end{align}
+    \end{proof}
+
+    \item
+    An $n$-team basketball tournament consists of some set of $n\geq2$ teams. Team $p$ beats team $q$ iff $q$
+does not beat $p$, for all teams $p\neq q$. A sequence of distinct teams $p_{1}$, $p_{2}$,..., $p_{k}$, such that team $p_{i}$ beats team $p_{i+1}$ for $1\leq i<k$ is called a ranking of these teams. If also team $p_{k}$ beats team $p_{1}$, the ranking is called a \emph{k-cycle}. 
+
+Prove by mathematical induction that in every tournament, either there is a ``champion" team that beats every other team, or there is a 3-cycle. 
+    \begin{proof} We prove the statement is true by induction.
+   	~\\
+   	\textbf{Basis step:} n=2: Suppose that team team $p$ and team $q$ are in the tournament. Because team $p$ beats team $q$ iff $q$
+does not beat $p$, the winner is the champion.  
+
+	\textbf{Induction Hypothesis:} Assume that for any tournament having $n$ teams, either there is a ``champion" team that beats every other team, or there is a 3-cycle.  
+	
+	\textbf{Proof of Induction Step:} For any tournament having $n+1$ teams denoted as $p_1,p_2\dots , p_{n},p_{n+1}$ there are two cases:
+	
+	\textit{Case 1:} There is a team denoted as $p_n$ that beats all other $n-1$ teams in $\{p_1,p_2 \dots , p_{n}\}$. If $p_n$ beats $p_{n+1}$, then $p_n$ is the champion. If $p_{n+1}$ beats $p_{n}$, there are two cases:  
+	
+	\textit{Case 1.1:} $p_{n+1}$ beats all of the teams in $\{p_1,p_2\dots , p_{n-1}\}$, then $p_{n+1}$ is the champion.
+	
+	\textit{Case 1.2:} Exists $p_i$ in $\{p_1,p_2 \dots , p_{n-1}\}$, such that $p_i$ beats $p_{n+1}$. Then $p_n, p_{n+1},and \quad p_i$ consists of a 3-cycle.
+	
+	\textit{Case 2:} There is a 3-cycle in $\{p_1,p_2 \dots , p_{n}\}$. Such 3-cycle will be maintained after the participation of team $p_{n+1}$ .
+    \end{proof}
+
+\end{enumerate}
+
+\vspace{20pt}
+
+\textbf{Remark:} You need to include your .pdf and .tex files in your uploaded .rar or .zip file.
+
+%========================================================================
+\end{document}

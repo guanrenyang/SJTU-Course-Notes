@@ -1,0 +1,197 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+  \usepackage{amssymb}
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\author{}
+\date{}
+
+\begin{document}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ sys
+}
+\ImportTok{from}\NormalTok{ tkinter }\ImportTok{import} \OperatorTok{*}
+
+
+
+\KeywordTok{class}\NormalTok{ MyCanvas(Canvas):
+}
+    \KeywordTok{def} \FunctionTok{\_\_init\_\_}\NormalTok{(}\VariableTok{self}\NormalTok{, master, hLineWidth}\OperatorTok{=}\DecValTok{1}\NormalTok{, vLineWidth}\OperatorTok{=}\DecValTok{1}\NormalTok{, radius}\OperatorTok{=}\DecValTok{2}\NormalTok{, }\OperatorTok{**}\NormalTok{kwargs):
+}
+\NormalTok{        Canvas.}\FunctionTok{\_\_init\_\_}\NormalTok{(}\VariableTok{self}\NormalTok{, master, kwargs)
+}
+        \VariableTok{self}\NormalTok{.hLineWidth }\OperatorTok{=}\NormalTok{ hLineWidth
+}
+        \VariableTok{self}\NormalTok{.vLineWidth }\OperatorTok{=}\NormalTok{ vLineWidth
+}
+        \VariableTok{self}\NormalTok{.radius }\OperatorTok{=}\NormalTok{ radius
+}
+
+
+    \KeywordTok{def}\NormalTok{ create\_segment\_h(}\VariableTok{self}\NormalTok{, x, y, l):
+}
+        \VariableTok{self}\NormalTok{.create\_line(x, y, x }\OperatorTok{+}\NormalTok{ l, y, width}\OperatorTok{=}\VariableTok{self}\NormalTok{.hLineWidth)
+}
+        \VariableTok{self}\NormalTok{.create\_oval(x }\OperatorTok{{-}} \VariableTok{self}\NormalTok{.radius, y }\OperatorTok{{-}} \VariableTok{self}\NormalTok{.radius, x }\OperatorTok{+} \VariableTok{self}\NormalTok{.radius, y }\OperatorTok{+} \VariableTok{self}\NormalTok{.radius, fill}\OperatorTok{=}\StringTok{\textquotesingle{}black\textquotesingle{}}\NormalTok{)
+}
+        \VariableTok{self}\NormalTok{.create\_oval(x }\OperatorTok{+}\NormalTok{ l }\OperatorTok{{-}} \VariableTok{self}\NormalTok{.radius, y }\OperatorTok{{-}} \VariableTok{self}\NormalTok{.radius, x }\OperatorTok{+}\NormalTok{ l }\OperatorTok{{-}} \VariableTok{self}\NormalTok{.radius, y }\OperatorTok{+} \VariableTok{self}\NormalTok{.radius, fill}\OperatorTok{=}\StringTok{\textquotesingle{}black\textquotesingle{}}\NormalTok{)
+}
+
+
+    \KeywordTok{def}\NormalTok{ create\_segment\_v(}\VariableTok{self}\NormalTok{, x, y, l):}\CommentTok{\#
+}
+        \VariableTok{self}\NormalTok{.create\_line(x, y, x, y }\OperatorTok{+}\NormalTok{ l, width}\OperatorTok{=}\VariableTok{self}\NormalTok{.vLineWidth)
+}
+        \VariableTok{self}\NormalTok{.create\_oval(x }\OperatorTok{{-}} \VariableTok{self}\NormalTok{.radius, y }\OperatorTok{{-}} \VariableTok{self}\NormalTok{.radius, x }\OperatorTok{+} \VariableTok{self}\NormalTok{.radius, y }\OperatorTok{+} \VariableTok{self}\NormalTok{.radius, fill}\OperatorTok{=}\StringTok{\textquotesingle{}black\textquotesingle{}}\NormalTok{)
+}
+        \VariableTok{self}\NormalTok{.create\_oval(x }\OperatorTok{{-}} \VariableTok{self}\NormalTok{.radius, y }\OperatorTok{+}\NormalTok{ l }\OperatorTok{{-}} \VariableTok{self}\NormalTok{.radius, x }\OperatorTok{+} \VariableTok{self}\NormalTok{.radius, y }\OperatorTok{+}\NormalTok{ l }\OperatorTok{+} \VariableTok{self}\NormalTok{.radius, fill}\OperatorTok{=}\StringTok{\textquotesingle{}black\textquotesingle{}}\NormalTok{)
+}
+
+
+    \KeywordTok{def}\NormalTok{ create\_line\_h(}\VariableTok{self}\NormalTok{, x, y, l):}\CommentTok{\#
+}
+        \VariableTok{self}\NormalTok{.create\_line(x, y, x }\OperatorTok{+}\NormalTok{ l, y, width}\OperatorTok{=}\VariableTok{self}\NormalTok{.hLineWidth)
+}
+
+
+    \KeywordTok{def}\NormalTok{ create\_line\_v(}\VariableTok{self}\NormalTok{, x, y, l):
+}
+        \VariableTok{self}\NormalTok{.create\_line(x, y, x, y }\OperatorTok{+}\NormalTok{ l, width}\OperatorTok{=}\VariableTok{self}\NormalTok{.vLineWidth)
+}
+
+
+\ControlFlowTok{if} \VariableTok{\_\_name\_\_} \OperatorTok{==} \StringTok{\textquotesingle{}\_\_main\_\_\textquotesingle{}}\NormalTok{:
+}
+\NormalTok{    n }\OperatorTok{=} \BuiltInTok{int}\NormalTok{(}\BuiltInTok{input}\NormalTok{(}\StringTok{\textquotesingle{}please input the number n: \textquotesingle{}}\NormalTok{))
+}
+\NormalTok{    sortingNetwork }\OperatorTok{=}\NormalTok{ Sorter(n)
+}
+
+
+\NormalTok{    winW, winH }\OperatorTok{=} \DecValTok{2400} \OperatorTok{*} \FloatTok{0.4}\NormalTok{, }\DecValTok{1500} \OperatorTok{*} \FloatTok{0.4}
+
+\NormalTok{    hMargin, vMargin }\OperatorTok{=}\NormalTok{ winW }\OperatorTok{//} \DecValTok{20}\NormalTok{, winH }\OperatorTok{//} \DecValTok{20}
+
+\NormalTok{    hScale, vScale }\OperatorTok{=}\NormalTok{ (winW }\OperatorTok{{-}} \DecValTok{2} \OperatorTok{*}\NormalTok{ hMargin) }\OperatorTok{//}\NormalTok{ (}\DecValTok{2}\OperatorTok{*}\NormalTok{n}\OperatorTok{{-}}\DecValTok{4}\NormalTok{), (winH }\OperatorTok{{-}} \DecValTok{2} \OperatorTok{*}\NormalTok{ vMargin) }\OperatorTok{//}\NormalTok{ (n }\OperatorTok{{-}} \DecValTok{1}\NormalTok{)
+}
+
+
+\NormalTok{    root }\OperatorTok{=}\NormalTok{ Tk()
+}
+\NormalTok{    root.title(}\StringTok{\textquotesingle{}A Typical Transposition Network with n=}\SpecialCharTok{\%d}\StringTok{ (Drawn by Python Tkinter)\textquotesingle{}} \OperatorTok{\%}\NormalTok{ n)
+}
+\NormalTok{    cvs }\OperatorTok{=}\NormalTok{ MyCanvas(root, bg}\OperatorTok{=}\StringTok{\textquotesingle{}white\textquotesingle{}}\NormalTok{, width}\OperatorTok{=}\NormalTok{winW, height}\OperatorTok{=}\NormalTok{winH)
+}
+
+
+    \ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(n):
+}
+\NormalTok{        cvs.create\_line\_h(hMargin,vMargin}\OperatorTok{+}\NormalTok{i}\OperatorTok{*}\NormalTok{vScale,(}\DecValTok{2}\OperatorTok{*}\NormalTok{n}\OperatorTok{{-}}\DecValTok{4}\NormalTok{)}\OperatorTok{*}\NormalTok{hScale)
+}
+    \ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(n}\OperatorTok{{-}}\DecValTok{1}\NormalTok{):
+}
+        \BuiltInTok{print}\NormalTok{(i)
+}
+        \ControlFlowTok{for}\NormalTok{ j }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(i}\OperatorTok{//}\DecValTok{2}\OperatorTok{+}\DecValTok{1}\NormalTok{):
+}
+            \BuiltInTok{print}\NormalTok{(i,j)
+}
+\NormalTok{            cvs.create\_segment\_v(hMargin}\OperatorTok{+}\NormalTok{i}\OperatorTok{*}\NormalTok{hScale,vMargin}\OperatorTok{+}\NormalTok{i}\OperatorTok{*}\NormalTok{vScale}\OperatorTok{{-}}\DecValTok{2}\OperatorTok{*}\NormalTok{j}\OperatorTok{*}\NormalTok{vScale,vScale)
+}
+\NormalTok{            cvs.create\_segment\_v(winW}\OperatorTok{{-}}\NormalTok{hMargin}\OperatorTok{{-}}\NormalTok{i}\OperatorTok{*}\NormalTok{hScale,vMargin}\OperatorTok{+}\NormalTok{i}\OperatorTok{*}\NormalTok{vScale}\OperatorTok{{-}}\DecValTok{2}\OperatorTok{*}\NormalTok{j}\OperatorTok{*}\NormalTok{vScale,vScale)
+}
+
+
+\NormalTok{    cvs.pack()
+}
+\NormalTok{    root.mainloop() }
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}

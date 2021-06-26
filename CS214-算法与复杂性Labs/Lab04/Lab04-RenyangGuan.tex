@@ -1,0 +1,394 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{amsmath,amscd,amsbsy,amssymb,latexsym,url,bm,amsthm}
+\usepackage{epsfig,graphicx,subfigure}
+\usepackage{enumitem,balance}
+\usepackage{wrapfig}
+\usepackage{mathrsfs,euscript}
+\usepackage[usenames]{xcolor}
+\usepackage{hyperref}
+\usepackage[vlined,ruled,linesnumbered]{algorithm2e}
+\usepackage{float}
+\hypersetup{colorlinks=true,linkcolor=black}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{exercise}{Exercise}
+\newtheorem*{solution}{Solution}
+\newtheorem{definition}{Definition}
+\theoremstyle{definition}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\newcommand{\postscript}[2]
+ {\setlength{\epsfxsize}{#2\hsize}
+  \centerline{\epsfbox{#1}}}
+
+\renewcommand{\baselinestretch}{1.0}
+
+\setlength{\oddsidemargin}{-0.365in}
+\setlength{\evensidemargin}{-0.365in}
+\setlength{\topmargin}{-0.3in}
+\setlength{\headheight}{0in}
+\setlength{\headsep}{0in}
+\setlength{\textheight}{10.1in}
+\setlength{\textwidth}{7in}
+\makeatletter \renewenvironment{proof}[1][Proof] {\par\pushQED{\qed}\normalfont\topsep6\p@\@plus6\p@\relax\trivlist\item[\hskip\labelsep\bfseries#1\@addpunct{.}]\ignorespaces}{\popQED\endtrivlist\@endpefalse} \makeatother
+\makeatletter
+\renewenvironment{solution}[1][Solution] {\par\pushQED{\qed}\normalfont\topsep6\p@\@plus6\p@\relax\trivlist\item[\hskip\labelsep\bfseries#1\@addpunct{.}]\ignorespaces}{\popQED\endtrivlist\@endpefalse} \makeatother
+
+\begin{document}
+
+\noindent
+
+%========================================================================
+\noindent\framebox[\linewidth]{\shortstack[c]{
+\Large{\textbf{Lab04-Matroid}}\vspace{1mm}\\
+CS214-Algorithm and Complexity, Xiaofeng Gao, Spring 2021.}}
+\begin{center}
+\footnotesize{\color{red}$*$ If there is any problem, please contact TA Haolin Zhou.}
+
+% Please write down your name, student id and email.
+\footnotesize{\color{blue}$*$ Name:Renyang Guan  \quad Student ID:519021911058 \quad Email: guanrenyang@sjtu.edu.cn}
+\end{center}
+
+\begin{enumerate}
+\item \textit{Property of Matroid.} 
+\begin{enumerate}
+	\item
+	Consider an arbitrary undirected graph $ G=(V,E) $. Let us define $ M_{G}=(S,C) $ where $ S=E $ and $ C=\left\{I \subseteq E \mid\left(V, E \backslash I\right) \text { is connected}\right\} $. Prove that $ M_{G} $ is a \textbf{matroid}.\par
+	    \begin{proof}
+	    ~\\
+	    \begin{enumerate}
+	    \item
+	    \textbf{\textit{Hereditary property:}}
+	    
+		For $\forall A \subset B$, where $\forall B \in C$, 
+		$$B\backslash A\supset \emptyset \Rightarrow B\backslash A=\{e_1,e_2,\cdots,e_k\}(k\geq 1)$$
+		Since $(V,E\backslash B)$ is connected, for $\forall D \subseteq B\backslash A$: $(V,(E\backslash B)\cup D)$ is connected.
+		
+		Considering $(V,(E\backslash B)\cup D)\subset (V,E\backslash A)$, $(V,E\backslash A)$ is connected. 
+		
+		In other words, $A\in C$.
+		
+		The property of hereditary has been proved.
+	    \\
+	    \\
+	    \item
+	    \textbf{\textit{Exchange property:}}
+\\
+\\
+	    Let us figure out a way to change graph $G_B$ into $G_A=(V,E-A)$.
+	    
+	    For any edge $e$ in $E$, it could be sorted into one of the categories below:
+	    
+	    \textbf{Case 1:} $e \notin A\cup B$
+	    
+	    \textit{No-Changing.}The edge $e$ will remain in $G_A$ because $e\in E-a$.
+	    \\
+	    \\
+	    \textbf{Case 2:} $e \in A\cap B$
+	    
+	    \textit{No-Changing.}The edge $e$ is excluded from both $G_A$ and $G_B$.
+	    \\
+	    \\
+	    \textbf{Case 3:} $e \in A\backslash B$($e\in B \backslash A$ is discussed in this case in the form of $e'$)
+	    
+	    \textit{Change.}The edge $e$ will be removed from $G_B$. Such case should be divide into sub-cases depending on whether $e$ is a cut edge.
+	    \\
+	    \textit{Case 3-1:} $e$ is a cut edge of $G_B$.
+	    
+	    If $e$ is removed from $G_B$, $G_B$ will be disconnected. There must be one edge $e'\in B\backslash A$ added to the graph, such that $e'$ connects the two connected components which $e$ connected.
+	    \\
+	    \textit{Case 3-2:} $e$ is not a cut edge of $G_B$.
+	    
+	 	$e$ ought to be removed from $G_B$ with no need to add a corresponding edge.
+	 	\\
+	 	\\
+	 	\textbf{Let us define such notations:}\\
+	    $E_1$ denotes the set of $e$ mentioned in \textit{Case 3-1}.\\
+	    $E_2$ denotes the set of $e'$ in corresponding with $e$.
+	    \\
+	    \\
+	    Since $|E_2|=|E_1|\leq |A|<|B|$ and $E_2\subset B\backslash A$, for any edge $x\in B\backslash A-E_2$, $x$ is not a cut edge, which means $E/(A\cup\{x\})$ is connected. In other words,
+	    $$A\cup \{x\}\in C$$
+	    
+	    \end{enumerate}
+	    \end{proof}
+	\item
+	Given a set $A$ containing $n$ real numbers, and you are allowed to choose $k$ numbers from $A$. The bigger the sum of the chosen numbers is, the better. What is your algorithm to choose? Prove its correctness using \textbf{matroid}.\par
+	\textbf{Remark:} Denote $\mathbf{C}$ be the collection of all subsets of $A$ that contains no more than $k$ elements. Try to prove $(A,\mathbf{C})$ is a matroid.\par
+	    \begin{solution}
+	    \textbf{\textit{My algorithm to choose:}}
+	    
+	\begin{algorithm}[H]
+		\KwIn{$A[1,\cdots,n]$}
+		\KwOut{$A[1,\cdots,k]$ }
+		
+		\BlankLine
+		\caption{My Algorithm}\label{Alg-my_algorithm}
+		
+		Sort all elements in $A$ into ordering $a_1\leq a_2\leq \cdots \leq x_n$\;
+		$T\leftarrow \emptyset$\;
+		\For{$i\leftarrow 1$ \KwTo $n$}{
+			\If{$|A\cup \{x_i\}|\leq k$}{
+			$A\leftarrow A\cup \{x_i\}$\;			
+			}
+				
+		}
+	\end{algorithm}
+	    \begin{proof}[Prove that $(A,C)$ is a matroid.]
+	    ~\\
+	    \begin{enumerate}
+	   	\item
+	   	\textbf{\textit{Hereditary property:}}\\
+	   	$\forall X\subset Y,\quad Y\in C$, since $|Y|\leq k$:
+	   	$$|X|\leq k$$
+	   	Because $Y\subset A$, such that $$X\subset A$$
+	   	Combining the two formulas above, $$X\in C$$.\\
+	    The property of hereditary has been proved.
+			   	
+	   	\item
+	   	\textbf{\textit{Exchange property:}}\\
+	   	$\forall X,Y\in C$ and $|X|<|Y|$, such that
+	   	$$|X|<|Y|\leq k$$
+	   	Denote $D$ as
+	   	$$D=Y\backslash X=\{d_1,d_2,\cdots,d_k \}(k\leq 1)$$
+	   	$\forall d\in D$: $$|X\cup \{d\}|\leq k$$
+	   	Because $Y\subseteq A$ and $ \{d\}\subseteq Y$:
+	   	$$X\cup \{d\}\subseteq A$$
+	   	Combining the formulas above: $$X\cup \{d\}\in C$$
+	   	The property of exchange has been proved yet.
+	    \end{enumerate}
+	    \end{proof}
+	    \end{solution}
+
+\end{enumerate}
+\item \textit{Unit-time Task Scheduling Problem.} Consider the instance of the \textbf{Unit-time Task Scheduling Problem} given in class. 
+    \begin{enumerate}
+        \item Each penalty $\omega_{i}$ is replaced by $80-\omega_{i}$. The modified instance is given in Tab.~\ref{tab:1}. Give the final schedule and the optimal penalty of the new instance using Greedy-MAX.
+		\begin{table}[H]
+			\setlength{\abovecaptionskip}{0.cm}
+			\setlength{\belowcaptionskip}{0.5cm}
+			\centering
+			\caption{Task}
+			\label{tab:1}			
+			\begin{tabular}{|c|ccccccc|}
+				\hline
+				$ a_{i} $&1&2&3&4&5&6&7\\
+				\hline
+				$ d_{i} $&4&2&4&3&1&4&6\\
+                \hline
+                $ \omega_{i} $&10&20&30&40&50&60&70\\
+				\hline
+			\end{tabular}
+		\end{table}
+	        \begin{solution}
+	        ~\\
+	            The final schedule is $<a_5,a_6,a_4,a_3,a_7,a_1,a_2>$.
+	            
+	            The optimal penalty is $\omega_1+\omega_2=30$.
+	       
+	        \end{solution}
+        \item Show how to determine in time $O(|A|)$ whether or not a given set $A$ of tasks is independent. (\textbf{Hint}: You can use the lemma of equivalence given in class)
+ 	        \begin{solution}
+ 	        ~\\
+			\textbf{\textit{Lemma of Equivalence:}} \\
+			That the set $A$ is independent is equivalent to that for $t=0,1,2,\cdots,n,N_t(A)\leq t$, where $N_t(A$) denotes the number of tasks in $A$ whose deadline is $t$ or earlier.
+			\\
+			\\
+			\textbf{\textit{The algorithm to determine whether $A$ is dependent in time $O(|A|)$}}\\
+			\begin{algorithm}[H]
+			\KwIn{A set $A$ of tasks}
+			\KwOut{$independent$ or $unindependent$}
+			
+			\BlankLine
+			\caption{Algorithm of determining in time $O(|A|)$}\label{Alg-DetermineIndpendent}
+			
+			$n\leftarrow |A|$\;
+			$N[n+1]\leftarrow=\{0,0,\cdots,0\}$\;
+			
+			\For{$i\leftarrow 1$ \KwTo $n$}{
+				$d_i\leftarrow deadline$ $of$ $task$ $A[i]$\;
+				\If{$d_i\leq n$}{
+				$N[d_i]\leftarrow N[d_i]+1$\;
+				}			
+			}
+			\For{$t\leftarrow 1$ \KwTo $n$}{
+				$N[t]\leftarrow N[t-1]+N[t]$\;
+				\If{$N[t]>t$}
+				{\Return{$unindependent$}}
+			}			
+			\Return{$independent$}
+
+			\end{algorithm}
+			\textbf{\textit{Description of the algorithm:}}
+			\\    	    
+			After analysing the property of $N_t(A)$ we could get such recursive formula easily:
+			$$			
+			N_t(A)=\left\{			
+			\begin{aligned}
+			&0 &t=0 \\
+			&N_{t-1}(A)+number\ of\ tasks\ whose\ dealine\ is\ t &t\geq 1
+			\end{aligned}
+			\right.
+			$$
+			
+			The \textbf{for} loop starting in line 3, which loops for $|A|$ times, traverses the set $A$. It set the number of tasks whose deadline is $t$ in $N[t]$.
+			
+			The \textbf{for} loop starting in line 7, which loops for $|A|$ times, calculate $N_t(A)$ according to the recursive formula above and set $N_t(A)$ to $N[t]$. At the same time, it checks every $N_t(A)$ whether or not it is greater than $t$, where $t$ is an integer ranges from $1$ to $n$.
+			
+			The total time complexity of the algorithm is $O(|A|)$.
+			
+
+            \end{solution}
+    \end{enumerate}
+
+\item \textit{MAX-3DM.} Let $X$, $Y$, $Z$ be three sets. We say two triples $\left(x_{1}, y_{1}, z_{1}\right)$ and $\left(x_{2}, y_{2}, z_{2}\right)$ in $X \times Y \times Z$ are \textit{disjoint} if $x_{1} \neq x_{2}$, $y_{1} \neq y_{2},$ and $z_{1} \neq z_{2}$. Consider the following problem:
+    
+    \begin{definition}[MAX-3DM] 
+        Given three disjoint sets $X$, $Y$, $Z$ and a non-negative weight function $c(\cdot)$ on all triples in $X \times Y \times Z$, \textbf{Maximum 3-Dimensional Matching} (MAX-3DM) is to find a collection $\mathcal{F}$ of disjoint triples with maximum total weight.
+    \end{definition}
+
+    \begin{enumerate}
+    	\item Let $D = X \times Y \times Z$. Define independent sets for MAX-3DM.
+    	\item Write a greedy algorithm based on Greedy-MAX in the form of \emph{pseudo code}. \label{Item-Greedy}
+    	\item Give a counter-example to show that your Greedy-MAX algorithm in Q.~\ref{Item-Greedy} is not optimal.
+    	\item Show that: $\max\limits_{F \subseteq D} \frac{v(F)}{u(F)} \leq 3$. {\color{blue}(Hint: you may need Theorem~\ref{Thm-Intersect} for this subquestion.)} 
+    	    \begin{solution}
+    	    ~\\
+    	    \begin{enumerate}
+    	    \item[(a)]
+    	    \begin{definition}[$(D,C)$]
+    	    Let $A$ denote any subset of $S$, in which any two triples $x,y\in A$, $x$ and $y$ are disjoint. $C$ is the collection of all possible subset $A$s. 
+    	    \end{definition}
+    	    
+    	   	\begin{proof}[Proof of independent property of $(D,C)$]
+			~\\    	   	
+    	   	$\forall A\subset B$, $\forall B\in C$, $\forall x,y \in A$
+    	   	$$x,y \in B\Rightarrow x,y\ are \	disjoint\Rightarrow A\in C$$
+    	   	
+    	   	\end{proof}
+    	    \item[(b)]
+    	    ~\\
+    	    \begin{algorithm}[H]
+    	    \KwIn{A set of triples $D$}
+    	    \KwOut{A collection $A$ of disjoint triples}
+    	    
+    	    \BlankLine
+    	    
+    	    \caption{Greedy-Max For MAX-3DM}\label{Alg-GreedyMax}
+    	    
+    	    Sort all elements in $D$ into ordering $c(x_1)\geq c(x_2)\geq \cdots \geq c(x_n)$\;
+    	    $A\leftarrow \emptyset$\;
+    	    $n\leftarrow |D|$\;
+    	    \For{$i\leftarrow 1$ \KwTo $n$}{\
+    	    	\If{$A\cup {x_i}\in C$}{
+    	    		$A\leftarrow A\cup \{x_i\}$\;
+    	    	}    
+    	    }
+    	    \Return{$A$}
+    	    \end{algorithm}
+    	 
+    	    \item[(c)]
+    	    \textbf{\textit{A Counter Example:}}
+			\\    	    
+    	    $$X=\{1,2\}\quad Y=\{3,4\} \quad Z=\{5,6\}$$
+    	    In such case:
+    	    $$D=\{(1,3,5),(1,3,6),(1,4,5),(1,4,6),(2,3,5),(2,3,6),(2,4,5),(2,4,6)\}$$
+    	    The function $C(*)$ is shown below:
+    	    \begin{equation}
+    	    \begin{split}
+    	    & (1,3,5)\rightarrow 9\quad    	     
+    	     (2,4,6)\rightarrow 1\\ 
+			& (2,4,5)\rightarrow 8\quad
+			 (1,3,6)\rightarrow 8\\   	    
+    	    & (1,4,5)\rightarrow 1\quad
+    	     (1,4,6)\rightarrow 1\\
+    	    & (2,3,5)\rightarrow 1\quad
+    	     (2,3,6)\rightarrow 1
+    	    \end{split}
+    	    \end{equation}
+    	    It is obvious that the optimal solution is $\mathcal{F}=\{(2,4,5),(1,3,6)\}$ where the maximum is $18$ while the solution of   Greedy-Max algorithm is $\mathcal{F}=\{(1,3,5),(2,4,6)\}$ where the sum is $10$.
+    	    
+    	    \item[(d)]
+			According to the Theorem.~\ref{Thm-Intersect}, to prove the origin proposition we just need to prove the Lemma.~\ref{Lem-FxIsMatroid} and Lemma.~\ref{Lem-CupOfFxFyFzIsF} below.
+			\begin{lemma}\label{Lem-FxIsMatroid}
+			~\\
+			Let the set $A$ satisfy:
+			$$A=\{(x,y,z)|x\in X,y\in Y,z\in Z,\ and \ \forall (x_1,y_1,z_1),(x_2,y_2,z_2)\in A:x_1\neq x_2 \}$$
+			and $\mathcal{F}_x$ is the collection of all the subsets of A.
+			
+			The system $(D,\mathcal{F}_x)$ is a matroid.
+			\end{lemma}
+			\begin{lemma}\label{Lem-CupOfFxFyFzIsF}
+			We define matroid $(D,\mathcal{F}_y)$ and $(D,\mathcal{F}_z)$ similar to that in Lemma.~\ref{Lem-FxIsMatroid}.
+			$\mathcal{F}_x$, $\mathcal{F}_y$, and $\mathcal{F}_z$ satisfy:
+			$$\mathcal{F}_x\cap \mathcal{F}_y \cap \mathcal{F}_z = \mathcal{F}$$
+			\end{lemma}
+			\begin{proof}[Proof of Lemma.~\ref{Lem-FxIsMatroid}]
+			~\\
+			\textbf{\textit{Hereditary property:}}\\
+			$\forall B \in \mathcal{F}_x, \forall A\subset B$:
+			\begin{equation}\nonumber
+			\begin{split}
+			& \forall (x_1,y_1,z_1),(x_2,y_2,z_2)\in A\\
+			\Rightarrow\ & (x_1,y_1,z_1),(x_2,y_2,z_2)\in B\\
+			\Rightarrow\ & x_1\neq x_2\\
+			\Rightarrow\ & A\in \mathcal{F}_x
+			\end{split}
+			\end{equation}
+			
+			
+			\textbf{\textit{Exchange property:}}\\
+			$\forall A,B\in \mathcal{F}_x$ and $|A|<|B|$, according to the definition of $\mathcal{F}_x$, we could easily get:
+			$$\forall (x_1,y_1,z_1),(x_2,y_2,z_2)\in A:x_1\neq x_2$$
+			$$\forall (x_1,y_1,z_1),(x_2,y_2,z_2)\in B:x_1\neq x_2$$
+			Let set $A_x=\{x|\ \forall(x,y,z)\in A\}$ and set $B_x=\{x|\ \forall(x,y,z)\in B\}$
+			
+			Because $|A|<|B|$ and that the $x$ value of every two different triples in $A$ are different,which is similar to $B$, we have: $$|A_x|<|B_x|$$
+			As a result of this, $$\exists x \in B_x,\ \forall x' \in A_x:\ x\neq x'$$
+			(Otherwise $B_x$ is a subset of $A_x$, which conflicts with $|A|<|B|$.)\\
+			and
+			$$\forall y\in Y,\ \forall z\in Z, (x,y,z)\notin A$$
+			According to the definition of $B_x$:
+			$$ \exists (x,y,z)\in B\backslash A,\ \forall (x',y',z')\in A:\ x\neq x' 
+			\Rightarrow  A\cup \{(x,y,z)\}\in \mathcal{F}_x $$
+			
+			\end{proof}
+			\begin{proof}[Proof of Lemma.~\ref{Lem-CupOfFxFyFzIsF}]
+			~\\
+			\textbf{\textit{Every element of $\mathcal{F}$ is in $\mathcal{F}_x$, $\mathcal{F}_y$, and $\mathcal{F}_z$}}
+			\\
+			\\
+			$\forall A \in \mathcal{F},\ \forall (x_1,y_1,z_1),(x_2,y_2,z_2)\in A$: $x_1\neq x_2,y_1\neq y_2,z_1\neq z_2$
+			\begin{equation}
+			\begin{split}
+			& x_1\neq x_2 \Rightarrow A\in \mathcal{F}_x\\
+			& y_1\neq y_2 \Rightarrow A\in \mathcal{F}_y\\
+			& z_1\neq z_2 \Rightarrow A\in \mathcal{F}_z\\			
+			\end{split}
+			\Rightarrow A\in \mathcal{F}_x\cap \mathcal{F}_y \cap \mathcal{F}_z
+			\end{equation}
+			\\
+			\textbf{\textit{Any element not in $\mathcal{F}$ is not in $\mathcal{F}_x$(or $\mathcal{F}_y$ or $\mathcal{F}_z$):}}\
+			\\
+			\\
+			$\forall A\notin \mathcal{F},\ \forall (x_1,y_1,z_1),(x_2,y_2,z_2)\in A:$
+			$$x_1\neq x_2 \ or\ y_1\neq y_2\ or \ z_1\neq z_2\Rightarrow (A\notin \mathcal{F}_x)\vee (A\notin \mathcal{F}_y )\vee( A\notin \mathcal{F}_z)$$ 
+			\end{proof}
+    	    \end{enumerate}
+    	    \end{solution}
+    \end{enumerate}
+    \begin{theorem} \label{Thm-Intersect}
+        Suppose an independent system $(E, \mathcal{I})$ is the intersection of $k$ matroids $\left(E, \mathcal{I}_{i}\right)$, $1 \leq i \leq k$; that is, $\mathcal{I}=\bigcap_{i=1}^{k} \mathcal{I}_{i}$. Then $\max\limits_{F \subseteq E} \frac{v(F)}{u(F)} \leq k$, where $v(F)$ is the maximum size of independent subset in $F$ and $u(F)$ is the minimum size of maximal independent subset in $F$.
+    \end{theorem}    
+\end{enumerate}
+
+\vspace{20pt}
+
+\textbf{Remark:} You need to include your .pdf and .tex files in your uploaded .rar or .zip file.
+
+%========================================================================
+\end{document}

@@ -1,0 +1,377 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{amsmath,amscd,amsbsy,amssymb,latexsym,url,bm,amsthm}
+\usepackage{epsfig,graphicx,subfigure}
+\usepackage{enumitem,balance}
+\usepackage{wrapfig}
+\usepackage{mathrsfs,euscript}
+\usepackage[usenames]{xcolor}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage[vlined,ruled,linesnumbered]{algorithm2e}
+\usepackage{threeparttable}
+\hypersetup{colorlinks=true,linkcolor=black}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{exercise}{Exercise}
+\newtheorem*{solution}{Solution}
+\newtheorem{definition}{Definition}
+\theoremstyle{definition}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\newcommand{\postscript}[2]
+ {\setlength{\epsfxsize}{#2\hsize}
+  \centerline{\epsfbox{#1}}}
+
+\renewcommand{\baselinestretch}{1.0}
+
+\setlength{\oddsidemargin}{-0.365in}
+\setlength{\evensidemargin}{-0.365in}
+\setlength{\topmargin}{-0.3in}
+\setlength{\headheight}{0in}
+\setlength{\headsep}{0in}
+\setlength{\textheight}{10.1in}
+\setlength{\textwidth}{7in}
+\makeatletter \renewenvironment{proof}[1][Proof] {\par\pushQED{\qed}\normalfont\topsep6\p@\@plus6\p@\relax\trivlist\item[\hskip\labelsep\bfseries#1\@addpunct{.}]\ignorespaces}{\popQED\endtrivlist\@endpefalse} \makeatother
+\makeatletter
+\renewenvironment{solution}[1][Solution] {\par\pushQED{\qed}\normalfont\topsep6\p@\@plus6\p@\relax\trivlist\item[\hskip\labelsep\bfseries#1\@addpunct{.}]\ignorespaces}{\popQED\endtrivlist\@endpefalse} \makeatother
+
+\begin{document}
+\noindent
+
+%========================================================================
+\noindent\framebox[\linewidth]{\shortstack[c]{
+\Large{\textbf{Lab01-Algorithm Analysis}}\vspace{1mm}\\
+CS214-Algorithm and Complexity, Xiaofeng Gao, Spring 2021.}}
+\begin{center}
+\footnotesize{\color{red}$*$ If there is any problem, please contact TA Haolin Zhou. Also please use English in homework.}
+
+% Please write down your name, student id and email.
+\footnotesize{\color{blue}$*$ Name:Renyang Guan  \quad Student ID:519021911058 \quad Email: guanrenyang@sjtu.edu.cn}
+\end{center}
+
+\begin{enumerate}
+
+
+\item \textit{Complexity Analysis.} Please analyze the time and space complexity of Alg.~\ref{Alg-quicksort} and Alg.~\ref{Alg-cocktailsort}. \par
+
+\begin{minipage}[t]{0.45\textwidth}
+	\begin{algorithm}[H]
+		\KwIn{An array $A[1,\cdots,n]$}
+		\KwOut{$A[1,\cdots,n]$ sorted nondecreasingly}
+		
+		\BlankLine
+		\caption{QuickSort}\label{Alg-quicksort}
+		
+		%\If{$n \le 1$}{
+		%  \Return\;
+		%}
+		
+		$pivot \leftarrow A[n]$; $i \leftarrow 1$\;
+		\For{$j \leftarrow 1$ \KwTo $n-1$}{
+			\If{$A[j] < pivot$}{
+				swap $A[i]$ and $A[j]$\;
+				$i \leftarrow i+1$\;
+			}
+		}
+		
+		swap $A[i]$ and $A[n]$\;
+		\lIf{$i>1$}{$\operatorname{QuickSort}(A[1,\cdots,i-1])$}
+		\lIf{$i<n$}{$\operatorname{QuickSort}(A[i+1,\cdots,n])$}
+	\end{algorithm}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.45\textwidth}
+\begin{algorithm}[H]
+\KwIn{An array $A[1,\cdots,n]$}
+\KwOut{$A[1,\cdots,n]$ sorted nonincreasingly}
+\BlankLine
+\caption{CocktailSort}
+\label{Alg-cocktailsort}
+\BlankLine
+	$i\leftarrow 1;$ $j\leftarrow n;$$sorted\leftarrow false$\;
+	\While{\textbf{not} sorted}{
+		$sorted \leftarrow true$\;
+		\For{$k\leftarrow i$ \textbf{to} $j-1$}{
+			\If{$A[k] < A[k+1]$}{
+				swap $A[k]$ and $A[k+1]$\;
+				$sorted\leftarrow false$\;
+			}
+		}
+		$j\leftarrow j-1$\;
+		
+
+		\For{$k\leftarrow j$ \textbf{downto} $i+1$}{
+			\If{$A[k-1] < A[k]$}{
+				swap $A[k-1]$ and $A[k]$\;
+				$sorted\leftarrow false$\;
+			}
+		}
+		$i\leftarrow i+1$\;
+	}
+\end{algorithm}
+\end{minipage}
+
+\begin{enumerate}
+	 
+\item Fill in the blanks and \textbf{explain} your answers. You need to answer when the best case and the worst case happen. 
+\begin{table}[!h]
+
+\label{Tab-compare}
+	\centering
+	\begin{threeparttable}
+	\begin{tabular}{c|c| c }
+		\toprule[2pt]
+		\textbf{Algorithm} & \textbf{Time Complexity}\tnote{1} & \textbf{Space Complexity} \\
+		\hline
+		\hline
+		$QuickSort$ & $\Theta(n\log n)$ \quad $\Theta(n\log n)$ \quad $\Theta(n^2)$ & $O(\log n)$ \\
+		
+		$CocktailSort$ &$\Theta(n)$\quad \quad\quad $\Theta(n^2)$\quad\quad\quad $\Theta(n^2)$  & $O(1)$  \\
+		\bottomrule[2pt]
+
+
+	\end{tabular}
+    \begin{tablenotes}
+    	\footnotesize
+    	\item[1] The response order can be given in \emph{best}, \emph{average}, and \emph{worst}.
+    \end{tablenotes}
+	\end{threeparttable}
+\end{table}
+
+{\large \textbf{Quick Sort}:}~\\
+
+\textbf{\textit{Best case time complexity:}} 
+
+The best case occurs when every time the partition seperates the sequence with $n$ elements into two subsequences, one of which has $\left \lfloor \frac{n}{2} \right \rfloor$ elements and the other has $\left \lceil \frac{n}{2} \right \rceil -1$ elements.\\
+For the sake of convenience,  let $n$ to be an even number. When $n$ is an odd number, the equation is similar, however.
+
+Assume that $T(n)$ is the time complexity of quicksorting a sequence with $n$ elements. It is obviously that the time complexity of the \textbf{\textit{for}} loop is $\Theta(n)$.
+
+Thus, 
+$$T(n)=2T(n/2)+\Theta(n)$$ 
+According to the master theory, the solution of the equation is $$T(n)=\Theta(n)$$.
+
+
+\textbf{\textit{Worst case time complexity:}} The worst  case occurs when every time the partition seperates the sequence with $n$ elements into two subsequences, one of which has $0$ elements and the other has $n-1$ elements.
+
+Continue to use the same notation $T(n)$. In this case, 
+$$T(n)=T(0)+T(n+1)+\Theta(n)$$
+We could get the solution of the equation by substitute method:
+$$T(n)=\Theta(n^2)$$
+
+\textbf{\textit{Average case time complexity:}} 
+Assume that probabilities of all of the permutations are equal.
+
+Suppose that every partition seperates the array into two arrarys with $i$ and $n-i-1$ elements. The time complexity of partition is $\Theta(n)$, so 
+$$T(n)=\frac{1}{n} \sum_{i=0}^{n-1} [T(i)+T(n-i-1)+\Theta(n)]$$.
+
+The solution of the equation is $T(n)=\Theta(n \log n)$.
+
+\begin{proof}~\\
+Assume that $\Theta(n)=cn$ when $n>n_0$, where $c$ is a positive number and $n_0$ is a positive integer.
+		\begin{align}
+       (n+1)T(n+1) &=\sum_{i=0}^{n} [T(i)+T(n-i)+c(n+1)]\\
+       & = \sum_{i=0}^{n-1}[T(i)+T(n-i-1)+c(n)]+2T(n)+c(2n+1)\\
+       & = (n+2)T(n)+c(2n+1)\\
+        \end{align}
+       \begin{equation}
+       \begin{split}
+      & \Rightarrow
+       \frac{T(n+1)}{n+2}-\frac{T(n)}{n+1}=\frac{c(2n+1)}{n^2+3n+2}\leq \frac{1}{n+1}
+       \\
+      & \Rightarrow
+       \frac{T(n+1)}{n+2}\leq \sum_{i=1}^{n+1} \frac{1}{i} =\Theta(\log n)
+      % \Rightarrow
+       T(n+1)=O(n\log n)
+	   \end{split}       
+       \end{equation}
+      Since the average time complexity can not exceed the restriction of best case time complexity which is $\Theta(n)$, thus$$T(n+1)=\Theta(n\log n)$$\end{proof}
+\textbf{\textit{Space complexity:}}
+
+The space complexity of every lawyer of the recursion tree is $O(1)$. The progress of recursion will cost stack space which equals to $O(\log n)$. 
+
+Thus, the space complexity of QuickSort is $O(\log n)$.
+\\
+\\
+{\large \textbf{\textbf{Cocktail Sort:}}}~
+\\
+\\
+\textbf{\textit{Best case time complexity:}} The best case occurs when the sequence has been \emph{\textbf{nonincreasingly sorted}}. The \textbf{\textit{while}} loop is only excuted once and the two \textbf{\textit{for}} loop is excuted $2n-3$ ($(n-1)+(n-2)$) times. Thus, the \textbf{best case} time complexity is $\Theta(n)$.
+\\
+\\
+\textbf{\textit{Worst case time conplexity:}} The worst case occurs when the sequence has been \emph{\textbf{nondecreasing sorted}}.  
+
+The worst case time is 
+$$\left\lfloor \frac{n}{2} \right\rfloor \times \sum_{i=1}^{\left\lfloor \frac{n}{2} \right\rfloor-1}2\times(n-1-2i)$$
+For the sake of convenivence, assume that $n=2k$, where $k$ is any positive integer, such that $\left\lfloor \frac{n}{2} \right\rfloor=k$. Then the worst case time is $$\frac{n^2}{2}-2n+2$$.
+
+Thus, the \textbf{worst case} time complexity is $\Theta(n^2)$.
+\\
+\\
+\textbf{\textit{Average case time complexity:}} Two assumptions:
+\begin{enumerate}
+\item $A[1,\cdots,n]$contains the numbers 1 through n.
+\item All $n!$ permutations are equally likely.
+\end{enumerate}
+
+Suppose $A[i]$ should be swapped at position $j(1\leq j \leq n)$.  \\
+
+When $1\leq j\leq i$, we need $i-j$ comparisons to put $A[i]$ at position $j$.  Since and integer in $[1,\cdots,i]$ is equally likely to be taken by j,i.e.,
+$$P(j=1)=P(j=2)=\cdots=p(j=i)=\frac{1}{i}$$
+
+When $i< j\leq n$, we need $j-i$ comparisons to put $A[i]$ at position $j$.  Since and integer in $[i+1,\cdots,n]$ is equally likely to be taken by j,i.e.,
+$$P(j=n+1)=P(j=n+2)=\cdots=p(j=n)=\frac{1}{n-i}$$
+
+The expectation number of comparisons for put element $A[i]$ in its proper position, is
+$$\sum_{j=1}^i \frac{i-j}{i}+\sum_{j=i+1}^n\frac{j-i}{n-i}=\frac{n}{2}$$
+
+The average number of comparisons performed by Alforithm CocktailSort is 
+$$\sum_{i=1}^n \frac{n}{2}=\frac{n^2}{2}$$
+
+Thus, the \textbf{average case} complexity is $\Theta(n^2)$
+
+\textbf{\textit{Space complexity:}}
+
+All the operations related to array A are completed in the memory of array A, so no extra space is needed. Thus, the space complexity of CocktailSort is $O(1)$.
+
+
+\item For Alg.~\ref{Alg-quicksort}, how to modify the algorithm to achieve the same expected performance as the \textbf{average} case when the \textbf{worst} case happens?
+\end{enumerate} 
+    \begin{solution}
+    ~\\
+    Considering the best case, an intuitive optimization is to try to seperate the unsorted sequence into to two subsequence nearly equally. The key point is to select an appropriate $pivot$ when the time complexity of partition is $O(nlogn)$
+
+	\textbf{\textit{Optimization method:}}
+	\begin{enumerate}
+	\item Using the principle of \emph{CountingSort}, store the number of times the integer i appears in the unsorted sequence, where $i$ is any number between $1$ to the maximum number of the unsorted sequence. 
+	\item Use a \emph{\textit{for}} loop tranversing the array $B$ which stores the counting result and find the {\large \textbf{\emph{median number}}} to be the $pivot$. 
+	\end{enumerate}
+	\textbf{\textit{Explanation of the pseudocode:}}~\\
+	Line$1-4$ is the progress of finding the maximum of the unsorted array $A$.
+	
+	Line$5-7$ is to count the total times of integer $i$ appearing in the arry $A$, which is stored in $B[i]$.
+	
+	Line$8-13$ is to find the $pivot$ which seperate the array $A$ equally.
+	
+	Line$14-21$ is the common step of \textit{QuickSort}.
+	
+	\textbf{\textit{Time complexity analysis:}}
+	
+	The time complexity of the four \emph{\textit{for}} loop is $\Theta(n)$, so we could easily get this equation:
+	$$T(n)=2T(n/2)+\Theta(n)$$
+	and the solution is
+	$$T(n)=\Theta(n\log n)$$
+	
+	
+    \begin{algorithm}[H]
+		\KwIn{An array $A[1,\cdots,n]$}
+		\KwOut{$A[1,\cdots,n]$ sorted nondecreasingly}
+		
+		\BlankLine
+		\caption{QuickSort-Optimized for the worst case}\label{Alg-quicksort-optimized}
+		
+		%\If{$n \le 1$}{
+		%  \Return\;
+		%}
+		
+		$max\leftarrow 0$\;
+		\For{$k \leftarrow 1$ \KwTo $n$}{
+			\If{$A[k] > max$}{
+				$max\leftarrow A[k]$\;
+			}
+		}
+		\BlankLine
+		
+		Initialize an array $B[1,\cdots,max]$\;
+		\For{$t\leftarrow 1$ \KwTo $n$}{
+			$B[A[t]]\leftarrow B[A[t]]+1$\;
+		}
+		\BlankLine
+		$sum\leftarrow 0$\;
+		\For{$l \leftarrow 1$ \KwTo $max$}{
+			$sum\leftarrow sum +B[l]$\;
+			
+			\If{$sum> \frac{n}{2}$}{
+			$pivot=B[l]$\;
+			Break\;
+			}		
+		}
+		\BlankLine
+		
+		$i \leftarrow 1$\;
+		\For{$j \leftarrow 1$ \KwTo $n-1$}{
+			\If{$A[j] < pivot$}{
+				swap $A[i]$ and $A[j]$\;
+				$i \leftarrow i+1$\;
+			}
+		}
+		
+		swap $A[i]$ and $A[n]$\;
+		\lIf{$i>1$}{$\operatorname{QuickSort}(A[1,\cdots,i-1])$}
+		\lIf{$i<n$}{$\operatorname{QuickSort}(A[i+1,\cdots,n])$}
+	\end{algorithm}
+    \end{solution}
+
+\item \textit{Growth Analysis.} Rank the following functions by order of growth with brief explanations: that is, find an arrangement $g_1, g_2, \ldots , g_{15}$ of the functions $g_1 = \Omega(g_2), g_2 = \Omega(g_3), \ldots, g_{14} = \Omega(g_{15})$.  Partition your list into equivalence classes such that functions $f(n)$ and $g(n)$ are in the same class if and only if $f(n) = \Theta(g(n))$. Use symbols ``$=$'' and ``$\prec$'' to order these functions appropriately. Here $\log n$ stands for $\ln n$.
+$$
+\begin{array}{ccccc}
+	1 \quad & \quad n \quad & \quad \log n \quad & \quad \log (\log n) \quad & \quad n \log n \\
+	\log_4 n \quad & \quad 2^n \quad & \quad 4^n \quad & \quad 2^{\log n} \quad & \quad 2^{2^n} \\
+	\log (n!) \quad & \quad n! \quad & \quad (2n)! \quad & \quad  n^{1/2} \quad & \quad n^2 \\
+\end{array}
+$$
+	
+ 	\begin{solution}
+	The Ranking of functions is as follows:
+	\begin{small}
+	$$1 \prec \log (\log n)) \prec \log_4 n = \log n \prec 	\sqrt{n} \prec 2^{\log n} \prec n \prec \log n! = n\log n \prec n^2 	 \prec 2^n \prec 4^n \prec n! \prec 		(2n)! 	\prec 2^{2^n}$$
+	\end{small}    
+    \textbf{Proof.} I will prove the above relationship in order from left to right \\
+    \textit{$1<\log (\log n))$:}
+    
+    $$\lim_{n\rightarrow\infty} \frac{1}{n}=0$$\\
+    \textit{$\log (\log n)) \prec \log_4 n$:}
+    $$\lim_{n\rightarrow\infty} \frac{\log (\log n))}{\log_4 n}=\lim_{n\rightarrow\infty} \log 4 \times \frac{\log n}{n}=0 $$
+    \textit{$\log_4 n = \log n$:}\\
+    $$\lim_{n\rightarrow\infty} \frac{\log_4 n}{\log n}=\frac{1}{\log 4}$$
+    \textit{$\log n \prec \sqrt{n}$:}\\
+    $$\lim_{n\rightarrow\infty} \frac{\log n}{\sqrt{n}}=\lim_{n\rightarrow\infty} \frac{\frac{1}{n}}{\frac{1}{2\sqrt{n}}}=0$$
+    \textit{$\sqrt{n} \prec 2^{\log n}$:} \\
+    $$\lim_{n\rightarrow\infty} \frac{\sqrt{n}}{2^{\log n}}=\lim_{n\rightarrow\infty} \frac{n^{\frac{1}{2}}}{n^{\log 2}}=\lim_{n\rightarrow\infty} \frac{1}{n{\log 2-\frac{1}{2}}}=0$$
+  	\textit{$2^{\log n}\prec n$:}
+  	$$\lim_{n\rightarrow\infty} \frac{2^{\log n}}{n}=\lim_{n\rightarrow\infty}\frac{1}{n^{1-\log 2}}=0$$
+   	\textit{$n \prec \log n!$:} Considering $n!=\omega(a^n)$(I will prove it later), where $a$ is a constant integer and $a>1$ \\
+   	$$0\leq \lim_{n\rightarrow\infty} \frac{n}{\log n!}\leq \lim_{n\rightarrow\infty} \frac{1}{\log \exp(n)}=\lim_{n\rightarrow\infty} \frac{1}{n}=0 \Rightarrow \lim_{n\rightarrow\infty} \frac{n}{\log n!} =0$$
+  	\textit{$\log n! = n\log n$: }
+	$$\lim_{n\rightarrow\infty} \frac{\log n!}{n\log n} =1$$
+	\textit{$n\log n \prec n^2$:}
+	$$\lim_{n\rightarrow\infty} \frac{n\log n}{n^2}=\lim_{n\rightarrow\infty} \frac{1}{n}=0$$
+	\textit{$n^2 	\prec 2^{n}$:}
+	$$\lim_{n\rightarrow\infty} \frac{n^2}{2^{n}}=0$$
+	\textit{$2^n\prec 4^n$:}
+	$$\lim_{n\rightarrow\infty} \frac{2^n}{4^n}=\lim_{n\rightarrow\infty} \frac{1}{2^n}=0$$
+	\textit{$4^n\prec n!$:} \\In this part, I will prove that for any positive integer $a$, where $a>1$, such that $\lim_{n\rightarrow\infty} \frac{a^n}{n!}=0$ 
+	$$0\leq \lim_{n\rightarrow\infty} \frac{a^n}{n!}=\lim_{n\rightarrow\infty} \frac{a^n}{a!\times (a+1)\times \cdots \times n} \leq \lim_{n\rightarrow\infty}\frac{a^2}{a!}\times \frac{a}{n}=0$$
+	\textit{$n!\leq (2n)!$:}
+	$$\lim_{n\rightarrow\infty} \frac{n!}{(2n)!}=\lim_{n\rightarrow\infty} \frac{1}{(n+1)\times(n+2)\times \cdots	\times 2n}=0$$
+	\textit{$(2n)!\leq 2^{2^n}$:}
+	
+	Let $a_n=\frac{(2n)!}{2^{2^n}}$,
+	$$\frac{a_{n+1}}{a_n}=\frac{(2n+1)(2n+2)}{2^{2^{n}}}\leq \frac{1}{2}$$
+	Thus, $a_n<(\frac{1}{2})^n$ and 
+	$$\lim_{n\rightarrow\infty} \frac{(2n)!}{2^{2^n}}=\lim_{n\rightarrow\infty} a_n=0$$
+    \end{solution}
+
+
+\end{enumerate}
+
+\vspace{20pt}
+
+\textbf{Remark:} You need to include your .pdf and .tex files in your uploaded .rar or .zip file.
+
+%========================================================================
+\end{document}

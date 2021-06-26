@@ -1,0 +1,36 @@
+NbMonths = 6;
+
+Prod = {Prod1, Prod2, Prod3, Prod4, Prod5, Prod6, Prod7};
+Process = {Grind, VDrill, HDrill, Bore, Plane};
+
+// profitProd[j] is profit per unit for product j
+ProfitProd = [10 6 8 4 11 9 3];
+
+// processProd[i][j] gives hours of process i required by product j
+ProcessProd = [[0.5  0.7  0.0  0.0  0.3  0.2 0.5 ]
+               [0.1  0.2  0.0  0.3  0.0  0.6 0.0 ]
+               [0.2  0.0  0.8  0.0  0.0  0.0 0.6 ]
+               [0.05 0.03 0.0  0.07 0.1  0.0 0.08]
+               [0.0  0.0  0.01 0.0  0.05 0.0 0.05]];
+
+// marketProd[i][j] gives marketing limitation on product j for month i
+MarketProd = [[500 1000 300  300 800  200 100]
+              [600 500  200  0   400  300 150]
+              [300 600  0    0   500  400 100]
+              [200 300  400  500 200  0   100]
+              [0   100  500  100 1000 300 0  ]
+              [500 500  100  300 1100 500 60 ]];
+
+CostHold  = 0.5;
+StartHold = 0;
+EndHold   = 50;
+MaxHold   = 100;
+
+// process capacity
+HoursMonth = 384; // 2 eight hour shifts per day, 24 working days per month;
+
+// number of each type of machine
+NumProcess = [4 2 3 1 1];
+
+// how many machines must be down over 6 month period
+NumDown = [4 2 3 1 1];

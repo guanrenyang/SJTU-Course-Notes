@@ -11,4 +11,5 @@
   2. CS-214 算法与复杂性(Labs)
   3. CS-359 计算机系统结构(Notes)
   4. EE-209 计算机组成(Notes,Projects)
+  5. CS-241 问题求解与实践([Labs](https://github.com/guanrenyang/CS241-Principles-and-Practice-of-Problem-Solving.git),[Projects](https://github.com/guanrenyang/qt-TaxiDemandAnalyzer.git))
 

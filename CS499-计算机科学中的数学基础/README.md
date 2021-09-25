@@ -11,8 +11,6 @@
 1. 复习要点.pdf
 2. 复习要点.goodnotes（可在GoodNotes软件中编辑）
 
-注意：所有内容均为中文
+所有内容均为中文
 
-## Examples
 
-TBD

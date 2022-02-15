@@ -16,5 +16,5 @@
   8. CS-236 云计算技术([Homeworks, Projects](https://github.com/guanrenyang/SJTU-Course-Notes/tree/main/CS236-%E4%BA%91%E8%AE%A1%E7%AE%97%E6%8A%80%E6%9C%AF))
   9. CS-410 人工智能([Notes, Homeworks, Projects](https://github.com/guanrenyang/SJTU-Course-Notes/tree/main/CS410-%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD))
   10. CS-382 自然语言处理([Homeworks, Projects](https://github.com/guanrenyang/CS328-Natural-Language-Processing))
-  11. EI-313 工程实践与科技创新Ⅲ-D(虚拟化)([Projects])
+  11. EI-313 工程实践与科技创新Ⅲ-D(虚拟化)([Projects](https://github.com/guanrenyang/SJTU-EI313-Virtualization_and_Cloud_Computing))
 

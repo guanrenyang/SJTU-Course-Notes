@@ -15,6 +15,6 @@
   7. CS-337 计算机图形学([Project](https://github.com/guanrenyang/NSRR-Reimplementation))
   8. CS-339 计算机网络([Project](https://github.com/guanrenyang/SendTo))
   9. CS-236 云计算技术([Homeworks, Projects](https://github.com/guanrenyang/SJTU-Course-Notes/tree/main/CS236-%E4%BA%91%E8%AE%A1%E7%AE%97%E6%8A%80%E6%9C%AF))
-  10. CS-410 人工智能
+  10. CS-410 人工智能([Homeworks, Projects](https://github.com/guanrenyang/SJTU-Course-Notes/tree/main/CS410-%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD))
   11. CS-382 自然语言处理([Homeworks, Projects](https://github.com/guanrenyang/CS328-Natural-Language-Processing))
 

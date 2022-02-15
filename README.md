@@ -14,6 +14,6 @@
   6. CS-359 操作系统课程设计(Projects)
   7. CS-337 计算机图形学
   8. CS-339 计算机网络([Project](https://github.com/guanrenyang/SendTo))
-  9. CS-236 云计算技术([Project](https://github.com/guanrenyang/Distributed-Framework-First-Try))
+  9. CS-236 云计算技术([Homeworks, Projects](https://github.com/guanrenyang/SJTU-Course-Notes/tree/main/CS236-%E4%BA%91%E8%AE%A1%E7%AE%97%E6%8A%80%E6%9C%AF))
   10. CS-410 人工智能
   11. CS-382 自然语言处理([Homeworks, Projects](https://github.com/guanrenyang/CS328-Natural-Language-Processing))

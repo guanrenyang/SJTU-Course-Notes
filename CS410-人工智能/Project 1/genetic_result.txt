@@ -1,0 +1,27 @@
+==========Pair-wise alignment task==========
+=====searching sequence 0======
+cost: 208  index: 48
+target sequence: IPHJJJPJJJPAJOJPJJJPAJOJPPJJJKHJJJPJJJPJJJPAJOJPJJJPHJJJPJJJPAJOJPJJJPHJJ
+Processing time: 3414.5380487442017 s
+=====searching sequence 1======
+cost: 240  index: 28
+target sequence: IPZJILMLTHMULOSTUAMVOLKJPVLLMOKJPLTWWKOMKYJBOPLGUKOOPLSSTGBPKPPLWKOBMTULJKZKSAPXHUL
+Processing time: 3749.71035695076 s
+=====searching sequence 2======
+cost: 225  index: 45
+target sequence: IKBSKKKKWKKKKKKKKWWKKKKPGKKKKKXXGGKRKWWKWKKPKKKKKXKKKRWKMKKPKKWPKKKKKPGKKKLBKWWKKJ
+Processing time: 3995.2010736465454 s
+=====searching sequence 3======
+cost: 231  index: 18
+target sequence: OPJPXJPPMJPPMXPPMJPPXJPPOXPPXJJPJXXPXJPPOJPPMXPPOGPPXXPPOMPPXXPPOXPPXJPQXPPBJPPPXPPX
+Processing time: 3949.6477727890015 s
+=====searching sequence 4======
+cost: 257  index: 28
+target sequence: IPZJILMLTHMULOSTUAMVOLKJPVLLMOKJPLTWWKOMKYJBOPLGUKOOPLSSTGBPKPPLWKOBMTULJKZKSAPXHUL
+Processing time: 3732.8905849456787 s
+
+
+
+==========Three-sequence alignment task==========
+
+=====searching query pair 0======

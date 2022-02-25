@@ -1,4 +1,4 @@
-#ch3 Project1 UNIX SHELL: SimpleShell
+# ch3 Project1 UNIX SHELL: SimpleShell
 excute:
 ```
 gcc -o SimpleShell SimpleShell.c
